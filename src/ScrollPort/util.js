@@ -1,5 +1,5 @@
 export function getItemsToShow(portHeight, itemHeight, itemsPerPage, totalItems, scrollTop) {
-  console.log(portHeight, itemHeight, itemsPerPage, totalItems, scrollTop)
+  // console.log(portHeight, itemHeight, itemsPerPage, totalItems, scrollTop)
   let itemFrom = null;
   let itemTo = null;
   if (portHeight === 0) return { itemFrom, itemTo };

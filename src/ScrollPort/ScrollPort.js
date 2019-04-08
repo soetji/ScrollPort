@@ -13,28 +13,28 @@ export default class extends React.PureComponent {
     itemTo: 0
   };
 
+  totalChildren = 0;
+  itemHeight = 0;
   ref = React.createRef();
 
   init() {
     this.ref.current.classList.add('init');
     this.itemHeight = this.ref.current.clientHeight;
-    console.log(this.itemHeight)
     this.totalChildren = React.Children.count(this.props.children);
     this.ref.current.classList.remove('init');
     this.setItemsToShow();
   }
 
-  setItemsToShow() {
+  setItemsToShow = () => {
     const { itemFrom, itemTo } = getItemsToShow(this.ref.current.clientHeight,
       this.itemHeight, this.props.itemsPerPage, this.totalChildren,
       this.ref.current.scrollTop);
     if (itemFrom !== this.state.itemFrom || itemTo !== this.state.itemTo) {
-      console.log({ itemFrom, itemTo });
       this.setState({ itemFrom, itemTo });
     }
   }
 
-  __handleScroll = debounce(this.setItemsToShow, 250);
+  __handleScroll = debounce(this.setItemsToShow, 50);
 
   componentDidUpdate() {
     this.setItemsToShow();
@@ -42,7 +42,7 @@ export default class extends React.PureComponent {
 
   componentDidMount() {
     this.init();
-    this.ref.current.addEventListener('scroll', this.setItemsToShow);
+    this.ref.current.addEventListener('scroll', this.__handleScroll);
   }
 
   componentWillUnmount() {
@@ -66,7 +66,7 @@ export default class extends React.PureComponent {
       >
         {this.renderSpacer(this.state.itemFrom - 0) }
         {this.renderChildren()}
-        {this.renderSpacer(this.totalChildren - this.state.itemTo)}
+        {this.renderSpacer(this.totalChildren - this.state.itemTo - 1)}
       </div>
     );
   }

@@ -1,0 +1,14 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.App {
+  border: 1px solid green;
+  font-family: sans-serif;
+  width: 100px;
+  height: 90%;
+  margin: 10px;
+}

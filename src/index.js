@@ -5,11 +5,11 @@ import Items from "./Items";
 import "./styles.css";
 
 function App() {
-  return (
-    <div className="App">
-      <Items />
-    </div>
-  );
+	return (
+		<div className="App">
+			<Items />
+		</div>
+	);
 }
 
 const rootElement = document.getElementById("root");

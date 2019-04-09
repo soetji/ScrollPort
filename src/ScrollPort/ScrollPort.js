@@ -17,11 +17,12 @@ export default class extends React.PureComponent {
     itemHeight = 0;
     ref = React.createRef();
 
+    getChildren = this.props.getChildren ? this.props.getChildren :
+        () => this.props.children;
+
     init() {
-        this.ref.current.classList.add('init');
-        this.itemHeight = this.ref.current.clientHeight;
-        this.totalChildren = React.Children.count(this.props.children);
-        this.ref.current.classList.remove('init');
+        this.itemHeight = this.ref.current.children[0].clientHeight;
+        this.totalChildren = React.Children.count(this.getChildren());
         this.setItemsToShow();
     }
 
@@ -53,7 +54,7 @@ export default class extends React.PureComponent {
         <div className='spacer' style={{height: itemsTotal * this.itemHeight}} />;
 
     renderChildren = () =>
-        React.Children.toArray(this.props.children).slice(
+        React.Children.toArray(this.getChildren()).slice(
             this.state.itemFrom,
             this.state.itemTo + 1
         );

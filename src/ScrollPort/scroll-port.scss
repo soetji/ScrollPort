@@ -4,11 +4,8 @@
     overflow: scroll;
     outline: 1px solid pink;
 
-    &.init {
-        height: auto;
-    }
-
     .spacer {
+        flex-shrink: 0;
         width: 100%;
     }
 }
